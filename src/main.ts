@@ -7,10 +7,12 @@ import { Page } from "playwright";
 
 export function getPageHtml(page: Page) {
   return page.evaluate((selector) => {
-    const el = document.querySelector(selector) as HTMLElement | null;
-    return el?.innerText || "";
+    const elements = document.querySelectorAll(selector);
+    return Array.from(elements).map(el => el.textContent ? el.textContent.trim() : '').join('\n');
   }, config.selector);
 }
+
+
 
 if (process.env.NO_CRAWL !== "true") {
   // PlaywrightCrawler crawls the web using a headless

@@ -18,14 +18,18 @@ type Config = {
     page: Page;
     pushData: (data: any) => Promise<void>;
   }) => Promise<void>;
-    /** Optional timeout for waiting for a selector to appear */
+  /** Optional timeout for waiting for a selector to appear */
   waitForSelectorTimeout?: number;
+  /** Hyperlink to be included in the output */
+  hyperlink?: string;
 };
 
 export const config: Config = {
-  url: "https://www.builder.io/c/docs/developers",
-  match: "https://www.builder.io/c/docs/**",
-  selector: `.docs-builder-container`,
-  maxPagesToCrawl: 50,
+  url: "https://support.google.com/google-ads",
+  match: "https://support.google.com/google-ads/**",
+  selector: `div[role='navigation'] a, h2, h3, h4, h5, p, table`,
+  maxPagesToCrawl: 10000,
+  waitForSelectorTimeout: 5000,
   outputFileName: "output.json",
+  hyperlink: "<a href='https://www.example.com'>Example</a>"
 };
