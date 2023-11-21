@@ -7,12 +7,19 @@ import { Page } from "playwright";
 
 export function getPageHtml(page: Page) {
   return page.evaluate((selector) => {
-    const elements = document.querySelectorAll(selector);
-    return Array.from(elements).map(el => el.textContent ? el.textContent.trim() : '').join('\n');
+    const table = document.querySelector(selector);
+    let tableText = '';
+    if (table) {
+      const rows = table.querySelectorAll('tr');
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('th, td');
+        let rowText = Array.from(cells).map(cell => cell.textContent ? cell.textContent.trim() : '').join(', ');
+        tableText += rowText + '\n';
+      });
+    }
+    return tableText;
   }, config.selector);
 }
-
-
 
 if (process.env.NO_CRAWL !== "true") {
   // PlaywrightCrawler crawls the web using a headless
