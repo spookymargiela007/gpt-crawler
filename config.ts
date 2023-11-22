@@ -27,9 +27,9 @@ type Config = {
 export const config: Config = {
   url: "https://support.google.com/google-ads",
   match: "https://support.google.com/google-ads/**",
-  selector: `div[role='navigation'] a, h2, h3, h4, h5, p, table`,
-  maxPagesToCrawl: 10000,
+  selector: `div[role='navigation'] a, h2, h3, h4, h5, p, table, article`,
+  maxPagesToCrawl: 1,
   waitForSelectorTimeout: 5000,
-  outputFileName: "output.json",
+  outputFileName: "help.json",
   hyperlink: "<a href='https://www.example.com'>Example</a>"
 };
